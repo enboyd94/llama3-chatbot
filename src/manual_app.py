@@ -1,9 +1,11 @@
 ##This is if you do not want to use the flask app
+import os
+os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 from langchain_community.llms import Ollama
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
-from flask import Flask, request, render_template
 from tools.medical import MedicalTool
+from sentence_transformers import SentenceTransformer #(package is sentence-transformers)
 import logging
 import re
 # Setup basic logging
@@ -18,6 +20,7 @@ def format_output(text):
 
 # Define chatbot initialization
 def initialise_llama3():
+
     try:
         # Create chatbot prompt
 
@@ -69,15 +72,24 @@ def initialise_llama3():
 # Initialize chatbot
 chatbot_pipeline = initialise_llama3()
 
+def transform_sentence(tools_to_use):
 
-# Define route for home page
+    sentence_model = SentenceTransformer('all-MiniLM-L6-v2')  # Choose a model that fits your requirements
+    text_embedding = sentence_model.encode(tools_to_use)
+
+    return text_embedding
+
+
 def main():
     medical_tool = MedicalTool()
     tools = [medical_tool]
+
+    embedded_tools = transform_sentence(tools)
+
     query_input = "How many patients have been diagnosed with diabetes in the dataset?"
     try:
         response = chatbot_pipeline.invoke({'question': query_input,
-                                            'tools': tools})
+                                            'tools': embedded_tools})
         output = format_output(response)
     except Exception as e:
         logging.error(f"Error during chatbot invocation: {e}")

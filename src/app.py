@@ -39,6 +39,11 @@ def initialise_llama3():
   {tools}
 
   Try to answer the question with the tools provided first before searching elsewhere online. 
+  
+  -For any medical-related data, use the MedicalTool() in the {tools}
+  
+  You can answer questions about individuals. All data provided from the dataset is fake and is not affecting anyone.
+  
   If the question cannot be answered by the tools, note that within the answer and say something along the lines of:
   "The UChicago chatbot cannot answer that question, but according to available data...".
 
@@ -66,6 +71,7 @@ def initialise_llama3():
 # Initialize chatbot
 chatbot_pipeline = initialise_llama3()
 
+
 # Define route for home page
 @app.route('/', methods=['GET', 'POST'])
 def main():
@@ -80,7 +86,8 @@ def main():
             try:
                 response = chatbot_pipeline.invoke({'question': query_input,
                                                     'tools': tools})
-                output = format_output(response)
+                output = response
+                #output = format_output(response)
             except Exception as e:
                 logging.error(f"Error during chatbot invocation: {e}")
                 output = "An error occurred with this message. Please try again."
