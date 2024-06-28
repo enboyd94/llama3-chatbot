@@ -86,8 +86,7 @@ def main():
             try:
                 response = chatbot_pipeline.invoke({'question': query_input,
                                                     'tools': tools})
-                output = response
-                #output = format_output(response)
+                output = format_output(response)
             except Exception as e:
                 logging.error(f"Error during chatbot invocation: {e}")
                 output = "An error occurred with this message. Please try again."

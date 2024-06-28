@@ -54,7 +54,8 @@ class MedicalTool(BaseTool):
         -Could be phrased as: What is the likelihood of [first name last name] developing diabetes based on his medical history and demographic information?
     -Identify potential drug interactions or adverse reactions based on [first name last name]'s medical history and current medications
 
-    Any individual questions can be answered with the descriptions and transcriptions associated with that name. If a name is given, index to that row only. Do not make up info about them.
+    Any individual questions can be answered with the descriptions and transcriptions associated with the name column. 
+    If a name is given, index to that row only. Do not make up info about them.
 
     For any question that asks for a count of anything, only give a count of one item per row!
 
