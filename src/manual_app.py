@@ -1,6 +1,4 @@
 ##This is if you do not want to use the flask app
-import os
-os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 from langchain_community.llms import Ollama
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
