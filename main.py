@@ -2,9 +2,9 @@ from langchain_community.llms import Ollama
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from flask import Flask, request, render_template
-from tools.medical import MedicalTool
-from tools.academic import AcademicTool
-from tools.financial import FinancialTool
+from src.tools.medical import MedicalTool
+from src.tools.academic import AcademicTool
+from src.tools.financial import FinancialTool
 import logging
 import re
 import os

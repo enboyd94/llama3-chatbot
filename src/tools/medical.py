@@ -1,6 +1,6 @@
 from langchain.tools import tool, BaseTool
 import pandas as pd
-from tools.clean_text import *
+from src.tools.clean_text import *
 
 def get_medical_info():
 

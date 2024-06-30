@@ -1,5 +1,5 @@
 from langchain.tools import tool, BaseTool
-from tools.clean_text import *
+from src.tools.clean_text import *
 
 
 class AcademicTool(BaseTool):
