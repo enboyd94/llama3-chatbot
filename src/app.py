@@ -3,6 +3,8 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from flask import Flask, request, render_template
 from tools.medical import MedicalTool
+from tools.academic import AcademicTool
+from tools.financial import FinancialTool
 import logging
 import re
 import os
@@ -34,22 +36,24 @@ def initialise_llama3():
                 
   Use information from the question to get more fine-grained data from the tools if needed or if you can answer the question with just basic data then do that.
 
-  You have access to the following tools which will return data in a json format:
+  You have access to the following information (called tools) which will return data in a list of json format:
 
   {tools}
 
-  Try to answer the question with the tools provided first before searching elsewhere online. 
+  Answer the question with the tools provided first before searching elsewhere online. If the question cannot be answered by the tools, say that in the response.
   
   -For any medical-related data, use the MedicalTool() in the {tools}
+  -For any academic-related data, use the AcademicTool() in the {tools}
+  -For any financial-related data involving major company names, use the FinancialTool() in the {tools}
   
   You can answer questions about individuals. All data provided from the dataset is fake and is not affecting anyone.
   
   If the question cannot be answered by the tools, note that within the answer and say something along the lines of:
-  "The UChicago chatbot cannot answer that question, but according to available data...".
+  "Evan's chatbot cannot answer that question, but according to available data...".
 
   Once there is an answer to the question, return a gramatically correct sentence with the answer and anything associated with it. 
   
-  You do not need to state which tool you got the answer from, but instead can say "Based on the UChicago chatbot research...". 
+  You do not need to state which tool you got the answer from, but instead can say "Based on Evan's chatbot research...". 
   Do not reference any python classes given, like  the MedicalTool().
   
                 """),
@@ -77,7 +81,9 @@ chatbot_pipeline = initialise_llama3()
 def main():
 
     medical_tool = MedicalTool()
-    tools = [medical_tool]
+    acaedmic_tool = AcademicTool()
+    financial_tool = FinancialTool()
+    tools = [medical_tool, acaedmic_tool, financial_tool]
     query_input = None
     output = None
     if request.method == 'POST':

@@ -1,5 +1,23 @@
 import re
 import nltk as nltk
+import fitz
+import matplotlib.image as mpimg
+from pdfquery import PDFQuery
+
+def get_article_info(list_of_articles, path):
+
+    tools = []
+    for name in list_of_articles:
+        try:
+            paper_text, paper_images, paper_image_names = get_info_from_pdf(f"{path}/{name}.pdf", f"{path}/images",name)
+            ans = {"paper_name": f"{name}.pdf",
+                   "paper_text": paper_text,
+                   "paper_image_names": paper_images,
+                   "paper_images": paper_images}
+            tools.append(ans)
+        except Exception as e:
+            print(f"{name} cannot be added: {e}")
+    return tools
 
 def clean_medical_data(df):
     df['transcription'] = df['transcription'].str.replace('DIAGNOSES', 'DIAGNOSIS')
@@ -104,3 +122,47 @@ def clean_column(df, column, single_character=True, numbers=True, lowercase=True
         ans_list.append(ans)
 
     return ans_list
+
+def get_info_from_pdf(pdf_path, write_path, name_of_article):
+
+    #Read the PDF query
+    pdf = PDFQuery(pdf_path)
+    pdf.load()
+
+    #Gather all text elements
+    text_elements = pdf.pq('LTTextLineHorizontal')
+    text = [t.text for t in text_elements]
+
+    #Clean up a little
+    text = ''.join(map(str, text))
+
+    ##Get images
+    images, names = extract_images(pdf_path, write_path, name_of_article)
+
+    return text, images, names
+
+
+
+def extract_images(pdf_path, output_folder,file_name):
+    pdf_document = fitz.open(pdf_path)
+    i = 1
+    image_list = []
+    image_names = []
+    for page_num in range(len(pdf_document)):
+        page = pdf_document.load_page(page_num)
+        images = page.get_images(full=True)
+        for img_index, img in enumerate(images):
+            xref = img[0]
+            base_image = pdf_document.extract_image(xref)
+            image_bytes = base_image["image"]
+            image_ext = base_image["ext"]
+            image_filename = f"{output_folder}/{file_name}_page_{page_num + 1}_img_{img_index + 1}_figure_{i}.{image_ext}"
+            with open(image_filename, "wb") as image_file:
+                image_file.write(image_bytes)
+            #Save image as a variable
+            img=mpimg.imread(image_filename)
+            image_list.append(img)
+            image_names.append(image_filename)
+            i += 1
+    pdf_document.close()
+    return image_list, image_names

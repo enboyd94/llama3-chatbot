@@ -7,7 +7,7 @@ html, body{
 }
 body{
     background: rgb(0,0,0);
-    background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,22,1) 35%, rgba(0,17,38,1) 100%);
+    background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(136,0,0,0.73) 35%, rgba(136,0,0,1) 100%);
     background-size: cover;
     font-family:  "Roboto", sans-serif;
     display: flex;
@@ -115,34 +115,17 @@ input#query-input:-internal-autofill-selected{
 ::-webkit-scrollbar {
     width: 5px;
   }
-  
-  /* Track */
+
   ::-webkit-scrollbar-track {
     box-shadow: inset 0 0 5px grey; 
     border-radius: 10px;
   }
    
-  /* Handle */
   ::-webkit-scrollbar-thumb {
     background: rgb(37, 37, 37); 
     border-radius: 10px;
   }
   
-  /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
     background: #3a3a3a; 
   }
-  /* HTML: <div class="loader"></div>
-.loader {
-    width: 50px;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    background: 
-      radial-gradient(farthest-side,#ffa516 94%,#0000) top/8px 8px no-repeat,
-      conic-gradient(#0000 30%,#ffa516);
-    -webkit-mask: radial-gradient(farthest-side,#0000 calc(100% - 8px),#000 0);
-    animation: l13 1s infinite linear;
-  }
-  @keyframes l13{ 
-    100%{transform: rotate(1turn)}
-  } */
