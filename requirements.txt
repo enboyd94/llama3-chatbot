@@ -4,5 +4,4 @@ flask>=2.2.2
 fitz
 pdfquery
 nltk
-re
 matplotlib
