@@ -1,5 +1,6 @@
 langchain-core==0.2.10
 langchain-community==0.2.6
+setuptools==60.8.2
 flask>=2.2.2
 fitz
 pdfquery==0.4.3
