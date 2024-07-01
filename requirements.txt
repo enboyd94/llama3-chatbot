@@ -1,9 +1,10 @@
-setuptools==60.8.2
+setuptools
+gunicorn
 importlib-metadata
 langchain-core
 langchain-community
-flask>=2.2.2
+flask
 fitz
-pdfquery==0.4.3
+pdfquery
 nltk
 matplotlib

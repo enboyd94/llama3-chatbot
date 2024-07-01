@@ -29,7 +29,7 @@ def initialise_llama3():
         create_prompt = ChatPromptTemplate.from_messages(
             [
                 ("system", """
-                You are my personal assistant to answer questions. You are to anwser questions about financial data, 
+                You are my personal assistant to answer questions. You are to answer questions about financial data, 
                  healthcare data, or academic research. Only your final answer will be shown.
                 Answer the following questions as best you can. Try to associate the tool 
                 Do not provide any information that is not in the tools provided.
