@@ -1,3 +1,4 @@
+pathlib
 setuptools
 gunicorn
 importlib-metadata
