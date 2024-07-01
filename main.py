@@ -1,3 +1,4 @@
+print("Running")
 from langchain_community.llms import Ollama
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
@@ -7,7 +8,6 @@ from src.tools.academic import AcademicTool
 from src.tools.financial import FinancialTool
 import logging
 import re
-import os
 # Setup basic logging
 logging.basicConfig(level=logging.DEBUG)
 
