@@ -1,0 +1,12 @@
+pathlib==1.0.1
+mrio_common_metadata==0.2
+setuptools==60.8.2
+gunicorn
+importlib-metadata
+langchain-core
+langchain-community
+flask
+fitz
+pdfquery
+nltk
+matplotlib
