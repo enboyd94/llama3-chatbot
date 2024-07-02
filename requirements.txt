@@ -10,3 +10,4 @@ fitz
 pdfquery
 nltk
 matplotlib
+PyMuPDF
