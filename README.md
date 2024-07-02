@@ -3,6 +3,10 @@ This repo was used for a 2024 Hackathon sponsored by UChicago. The goal was to e
 
 To run this repo, install the required packages in requirements.txt.
 
+```python
+pip install -r requirements.txt
+```
+
 In addition, you will need to download Ollama here - https://ollama.com/download
 
 Once that is downloaded onto your computer, navigate the terminal to this repo run the following command:
