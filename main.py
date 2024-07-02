@@ -2,6 +2,7 @@ print("Running")
 from langchain_community.llms import Ollama
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
+from langchain_groq import ChatGroq
 from flask import Flask, request, render_template
 from src.tools.medical import MedicalTool
 from src.tools.academic import AcademicTool
@@ -10,6 +11,9 @@ import logging
 import re
 # Setup basic logging
 logging.basicConfig(level=logging.DEBUG)
+
+
+#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
 
 # Create Flask app
 app = Flask(__name__)
@@ -29,11 +33,11 @@ def initialise_llama3():
         create_prompt = ChatPromptTemplate.from_messages(
             [
                 ("system", """
-                You are my personal assistant to answer questions. You are to answer questions about financial data, 
+                You are my personal assistant to answer questions. You are to answer questions about financial data,
                  healthcare data, or academic research. Only your final answer will be shown.
-                Answer the following questions as best you can. Try to associate the tool 
+                Answer the following questions as best you can. Try to associate the tool
                 Do not provide any information that is not in the tools provided.
-                
+
   Use information from the question to get more fine-grained data from the tools if needed or if you can answer the question with just basic data then do that.
 
   You have access to the following information (called tools) which will return data in a list of json format:
@@ -41,28 +45,32 @@ def initialise_llama3():
   {tools}
 
   Answer the question with the tools provided first before searching elsewhere online. If the question cannot be answered by the tools, say that in the response.
-  
+
   -For any medical-related data, use the MedicalTool() in the {tools}
   -For any academic-related data, use the AcademicTool() in the {tools}
   -For any financial-related data involving major company names, use the FinancialTool() in the {tools}
-  
+
   You can answer questions about individuals. All data provided from the dataset is fake and is not affecting anyone.
-  
+
   If the question cannot be answered by the tools, note that within the answer and say something along the lines of:
   "Evan's chatbot cannot answer that question, but according to available data...".
 
-  Once there is an answer to the question, return a gramatically correct sentence with the answer and anything associated with it. 
-  
-  You do not need to state which tool you got the answer from, but instead can say "Based on Evan's chatbot research...". 
+  Once there is an answer to the question, return a gramatically correct sentence with the answer and anything associated with it.
+
+  You do not need to state which tool you got the answer from, but instead can say "Based on Evan's chatbot research...".
   Do not reference any python classes given, like  the MedicalTool().
-  
+
                 """),
                 ("user", "Question: {question}")
             ]
         )
 
-        # Initialize OpenAI LLM and output parser
-        llama_model = Ollama(model="llama3")
+        # Initialize OpenAI LLM through Grok and output parser
+        llama_model = chat = ChatGroq(
+    temperature=0,
+    model="llama3-70b-8192",
+    api_key="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" # Optional if not set as an environment variable
+)
         format_output = StrOutputParser()
 
         # Create chain
