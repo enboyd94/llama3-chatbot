@@ -1,10 +1,10 @@
 from langchain.tools import tool, BaseTool
 import pandas as pd
 from src.tools.clean_text import *
-
+import os
 def get_medical_info():
 
-    stats = pd.read_csv("data/Healthcare/mtsamples_with_rand_names.csv")
+    stats = pd.read_csv("src/data/Healthcare/mtsamples_with_rand_names.csv")
     stats['name'] = stats['first_name'] + ' ' + stats['last_name']
 
     adj_stats = clean_medical_data(stats)

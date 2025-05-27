@@ -9,7 +9,7 @@ from src.tools.financial import FinancialTool
 import logging
 import re
 # Setup basic logging
-logging.basicConfig(level=logging.DEBUG)
+#logging.basicConfig(level=logging.DEBUG)
 
 # Create Flask app
 app = Flask(__name__)
@@ -41,11 +41,7 @@ def initialise_llama3():
   {tools}
 
   Answer the question with the tools provided first before searching elsewhere online. If the question cannot be answered by the tools, say that in the response.
-  
-  -For any medical-related data, use the MedicalTool() in the {tools}
-  -For any academic-related data, use the AcademicTool() in the {tools}
-  -For any financial-related data involving major company names, use the FinancialTool() in the {tools}
-  
+
   You can answer questions about individuals. All data provided from the dataset is fake and is not affecting anyone.
   
   If the question cannot be answered by the tools, note that within the answer and say something along the lines of:
@@ -72,18 +68,19 @@ def initialise_llama3():
         logging.error(f"Failed to initialize chatbot: {e}")
         raise
 
-# Initialize chatbot
-chatbot_pipeline = initialise_llama3()
+
 
 
 # Define route for home page
 @app.route('/', methods=['GET', 'POST'])
 def main():
 
-    medical_tool = MedicalTool()
-    acaedmic_tool = AcademicTool()
-    financial_tool = FinancialTool()
+    medical_tool = MedicalTool()._run()
+    acaedmic_tool = AcademicTool()._run()
+    financial_tool = FinancialTool()._run()
     tools = [medical_tool, acaedmic_tool, financial_tool]
+    # Initialize chatbot
+    chatbot_pipeline = initialise_llama3()
     query_input = None
     output = None
     if request.method == 'POST':

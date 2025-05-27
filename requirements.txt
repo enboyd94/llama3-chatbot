@@ -11,3 +11,4 @@ pdfquery
 nltk
 matplotlib
 PyMuPDF
+numpy==1.21.0

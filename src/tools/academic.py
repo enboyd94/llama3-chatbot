@@ -1,7 +1,6 @@
 from langchain.tools import tool, BaseTool
 from src.tools.clean_text import *
 
-
 class AcademicTool(BaseTool):
     name = "Academic Agent"
     description = '''
@@ -35,10 +34,11 @@ class AcademicTool(BaseTool):
         super(AcademicTool, self).__init__()
 
     def _run(self):
-        list_of_articles = ["attention", "Challenges LLM July 19_23","Continual_Pretraining",
-                            "cs224n-2023-lecture11-prompting-rlhf","llm_review 2","Multimodal",
-                            "Performance Evaluation","RAG Agent Resource-1"]
-        response = get_article_info(list_of_articles, "../data/Academic_Papers")
+        # list_of_articles = ["attention", "Challenges LLM July 19_23","Continual_Pretraining",
+        #                     "cs224n-2023-lecture11-prompting-rlhf","llm_review 2","Multimodal",
+        #                     "Performance Evaluation","RAG Agent Resource-1"]
+        list_of_articles = ["attention"]
+        response = get_article_info(list_of_articles, "src/data/Academic_Papers")
 
         return response
 

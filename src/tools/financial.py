@@ -44,14 +44,15 @@ class FinancialTool(BaseTool):
         super(FinancialTool, self).__init__()
 
     def _run(self):
-        list_of_articles = ["2020_alphabet_annual_report", "2021_alphabet_annual_report", "2022-alphabet-annual-report",
-                            "2023_alphabet", "2024_alphabet-10-q-q1-2024", "Amazon-2020-Annual-Report",
-                            "Amazon-2021-Annual-Report", "Amazon-2022-Annual-Report",
-                            "Amazon-com-Inc-2023-Annual-Report", "Apple_10-K-2021", "Apple_10-K-Q4-2020",
-                            "Apple_10-K-Q4-2022", "Apple_10-K-Q4-2023", "FB_2020-Annual-Report_FB",
-                            "FB_2021-Annual-Report_FB", "FB_2022", "FB_2023", "NASDAQ_NVDA_2020", "NASDAQ_NVDA_2021",
-                            "NASDAQ_NVDA_2022", "NASDAQ_NVDA_2023"]
-        response = get_article_info(list_of_articles, "../data/Financial_Documents")
+        # list_of_articles = ["2020_alphabet_annual_report", "2021_alphabet_annual_report", "2022-alphabet-annual-report",
+        #                     "2023_alphabet", "2024_alphabet-10-q-q1-2024", "Amazon-2020-Annual-Report",
+        #                     "Amazon-2021-Annual-Report", "Amazon-2022-Annual-Report",
+        #                     "Amazon-com-Inc-2023-Annual-Report", "Apple_10-K-2021", "Apple_10-K-Q4-2020",
+        #                     "Apple_10-K-Q4-2022", "Apple_10-K-Q4-2023", "FB_2020-Annual-Report_FB",
+        #                     "FB_2021-Annual-Report_FB", "FB_2022", "FB_2023", "NASDAQ_NVDA_2020", "NASDAQ_NVDA_2021",
+        #                     "NASDAQ_NVDA_2022", "NASDAQ_NVDA_2023"]
+        list_of_articles = ["2023_alphabet"]
+        response = get_article_info(list_of_articles, "src/data/Financial_Documents")
 
         return response
 
