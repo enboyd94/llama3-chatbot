@@ -1,3 +1,5 @@
+import json
+
 from langchain.tools import tool, BaseTool
 import pandas as pd
 from src.tools.clean_text import *
@@ -5,11 +7,13 @@ import os
 def get_medical_info():
 
     stats = pd.read_csv("src/data/Healthcare/mtsamples_with_rand_names.csv")
-    stats['name'] = stats['first_name'] + ' ' + stats['last_name']
 
     adj_stats = clean_medical_data(stats)
 
-    return adj_stats
+    #Take only a sample for now
+    adj_stats = adj_stats.head(3).to_dict(orient='list')
+
+    return json.dumps(adj_stats)
 
 
 class MedicalTool(BaseTool):
@@ -67,7 +71,7 @@ class MedicalTool(BaseTool):
     def _run(self):
         response = get_medical_info()
 
-        return response.to_dict('records')
+        return response
 
     def _arun(self):
         print('not implemented, use _run')

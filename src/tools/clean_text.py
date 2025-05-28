@@ -20,6 +20,8 @@ def get_article_info(list_of_articles, path):
     return tools
 
 def clean_medical_data(df):
+
+    df['name'] = df['first_name'] + ' ' + df['last_name']
     df['transcription'] = df['transcription'].str.replace('DIAGNOSES', 'DIAGNOSIS')
     df['transcription'] = df['transcription'].str.replace('PREOP DIAGNOSIS', 'PREOPERATIVE DIAGNOSIS')
     df['transcription'] = df['transcription'].str.replace('ALLERGIES TO MEDICATIONS', 'ALLERGIES')
@@ -76,8 +78,6 @@ def clean_medical_data(df):
 
     return df
 
-
-# Clean some of the text
 def clean_text(text, single_character=True, numbers=True, punctuation=True, lowercase=True, stop_words=True):
     # Remove punctuation - do this before tokenizing in case there are dashes that connect words
     if punctuation:
