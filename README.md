@@ -17,14 +17,14 @@ ollama run llama3
 
 This will set up llama3 onto your local machine.
 
+There is an option to run the platfrom on groq instead of Ollama. You may download a key here - https://console.groq.com/keys
+
+Switch the boolean use_groq = True in main.py to run through groq instead of Ollama.
+
 To run the file locally, navigate the terminal to run main.py:
 
 ```python
 python3 main.py
 ```
-
-There is an option to run the platfrom on groq instead of Ollama. You may download a key here - https://console.groq.com/keys
-
-Switch the boolean use_groq = True in main.py to run through groq instead of Ollama.
 
 From there a link to a local run of the UI should appear. You may answer any questions associated with the academic, financial, and medical data. Enjoy!
